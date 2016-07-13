@@ -1,0 +1,28 @@
+* {
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+.screen {
+
+}
+
+.board {
+	width: 502px;
+	height: 502px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.square {
+	display: flex;
+	height: 50px;
+	width: 50px;
+	background-color: lightblue;
+}
