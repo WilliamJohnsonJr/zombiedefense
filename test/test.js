@@ -21,4 +21,20 @@ describe('Player Class', function () {
       expect(player).to.be.an.instanceof(Player);
     });
   });
+
+  describe('Player properties', () => {
+  	it('should have 3 hitpoints',()=>{
+  		expect(player.hitpoints).to.equal(3);
+  	});
+  	it('should have an image', () =>{
+  		expect(player.image).to.be.a('string');
+  	});
+  	it('should have an image for when it is bitten', ()=>{
+  		expect(player.biteImage).to.be.a('string');
+  	});
+  	it('should have a sound for when it is bitten', () => {
+  		expect(player.sound).to.be.a('string');
+  	});
+  });
+
 });
