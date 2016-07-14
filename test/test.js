@@ -126,7 +126,7 @@ describe('Zombie Class', function(){
 	  	it('should have an image for when it gets shot twice', ()=>{
 	  		expect(zombie.shotImage2).to.be.a('string');
 	  	});
-	  	it('should have a sound for when it is shot', () => {
+	  	it('should have a sound for when it is shot', ()=>{
 	  		expect(zombie.sound).to.be.a('string');
 	  	});
 	  	it('should have a sound for when it dies', ()=>{
@@ -137,6 +137,7 @@ describe('Zombie Class', function(){
 	  	});
 	  	it('should have a y position on the game board', ()=>{
 	  		expect(zombie.position.y).to.be.a('number');
+	  	});
 	});
   	describe('Zombie actions', ()=>{
   		it('should be able to change its position left on the board', ()=>{
@@ -159,6 +160,7 @@ describe('Zombie Class', function(){
   		});
 	});
 });
+
 
 describe('Gun Class', function(){
 	let gun;
@@ -183,5 +185,5 @@ describe('Gun Class', function(){
 		it('should fire when the user pushes a button if it has bullets', ()=>{
 			expect(gun.shoot).to.be.a('function');
 		});
-	})
+	});
 });
