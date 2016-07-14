@@ -2,12 +2,53 @@
 import chai from 'chai';
 
 // Import Any Files to Test
-import { Player, Zombie, Gun } from '../src/js/classes';
+import { Game, Player, Zombie, Gun } from '../src/js/classes';
 
 // Set Chai Constants
 const expect = chai.expect;
 const should = chai.should();
 const assert = chai.assert;
+
+describe('Game Class', ()=>{
+	let game;
+	beforeEach(()=>{
+		game = new Game();
+	});
+	describe('Class Creation', ()=>{
+		it('should be an instance of Game',()=>{
+			expect(game).to.be.an.instanceof(Game);
+		});
+	});
+
+	describe("Game Properties", ()=>{
+		it('should have a state', ()=>{
+			expect(game.state).to.be.a('number');
+		});
+		it('should have a board',()=>{
+			expect(game.board).to.be.a('string');
+		});
+		it('should have a start screen', ()=>{
+			expect(game.startScreen).to.be.a('string');
+		});
+		it('should have a win screen', ()=>{
+			expect(game.winScreen).to.be.a('string');
+		});
+		it('should have a lose screen',()=>{
+			expect(game.loseScreen).to.be.a('string');
+		});
+	});
+	describe("Game Actions", ()=>{
+		it('should start a new game when the player presses a key', ()=>{
+			expect(game.start).to.be.a('function');
+		});
+		it('should end the game with the player wins', ()=>{
+			expect(game.youWin).to.be.a('function');
+		});
+		it('should end the game when the player dies', ()=>{
+			expect(game.gameOver).to.be.a('function');
+		});
+	});
+});
 
 describe('Player Class', function () {
 	let player;
@@ -104,7 +145,10 @@ describe('Zombie Class', function(){
   		it('should move down towards the player at a certain speed', ()=>{
   			expect(zombie.moveSpeed).to.be.a('function');
   		});
-  		it('should be able to make a sound when it gets bitten', ()=>{
+  		it('should be able to attack the player', ()=>{
+  			expect(zombie.attack).to.be.a('function');
+  		});
+  		it('should make a sound when it gets shot', ()=>{
   			expect(zombie.grunt).to.be.a('function');
   		});
   		it('should be able to scream when it dies', ()=>{

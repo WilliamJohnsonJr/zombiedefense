@@ -1,3 +1,7 @@
+class Game {
+	
+}
+
 class Player {
 	constructor(){
 		this.hitpoints = 3;
@@ -24,4 +28,4 @@ class Gun{
 
 }
 
-export { Player, Zombie, Gun };
+export { Game, Player, Zombie, Gun };
