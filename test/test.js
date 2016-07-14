@@ -112,7 +112,10 @@ describe('Zombie Class', function(){
 	});
 	describe ('Zombie Class Creation', ()=>{
 		it('should have 3 hitpoints',()=>{
-  			expect(zombie.hitpoints).to.equal(3);
+  			expect(zombie.hitpoints).to.be.a('number');
+  		});
+  		it('should have a certain speed that it moves at', ()=>{
+  			expect(zombie.moveSpeed).to.be.a('function');
   		});
 	  	it('should have an image', () =>{
 	  		expect(zombie.image).to.be.a('string');
@@ -142,11 +145,11 @@ describe('Zombie Class', function(){
   		it('should be able to change its position right on the board', ()=>{
   			expect(zombie.moveRight).to.be.a('function');
   		});
-  		it('should move down towards the player at a certain speed', ()=>{
-  			expect(zombie.moveSpeed).to.be.a('function');
-  		});
   		it('should be able to attack the player', ()=>{
   			expect(zombie.attack).to.be.a('function');
+  		});
+  		it('should make a sound when it attacks the player', ()=>{
+  			expect(zombie.attackSound).to.be.a('function');
   		});
   		it('should make a sound when it gets shot', ()=>{
   			expect(zombie.grunt).to.be.a('function');
