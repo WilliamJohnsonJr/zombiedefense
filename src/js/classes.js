@@ -5,11 +5,12 @@ class Player {
 		this.biteImage = "http://placekitten.com/50/50";
 		this.biteImage2 = "http://placehold.it/50/ffffff/000000"
 		this.sound = "../../app/sounds/Pain.mp3";
-		this.deathScream = "../../app/sounds/Psycho_Scream.mp3";
+		this.deathSound = "../../app/sounds/Psycho_Scream.mp3";
 	}
 
 	scream() {
-		var audio = new Audio(this.deathScream)
+		var audio = new Audio(this.deathSound);
+		audio.play();
 	}
 }
 
