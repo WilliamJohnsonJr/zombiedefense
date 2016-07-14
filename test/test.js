@@ -2,22 +2,23 @@
 import chai from 'chai';
 
 // Import Any Files to Test
+import { Player, Zombie } from '../src/js/characters';
 
 // Set Chai Constants
 const expect = chai.expect;
 const should = chai.should();
 const assert = chai.assert;
 
-describe('Something We Want To Test', function () {
+describe('Player Class', function () {
+	let player;
 
-  describe('Testing the Creation of Something', function () {
+	beforeEach(()=>{
+		player = new Player();
+	})
+  describe('Class Creation', function () {
 
-    it('should exist after we create it', function () {
-      let x = new Object;
-      expect(x).to.be.an.instanceof(Object);
+    it('should be an instance of Player', function () {
+      expect(player).to.be.an.instanceof(Player);
     });
-
   });
-
-
 });

@@ -18,6 +18,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	position: relative;
 }
 
 .square {
@@ -27,6 +28,14 @@
 	background-color: lightblue;
 }
 
-.zombie{
+#player{
+	position: absolute;
+    top: 450px;
+    left: 224px;
+}
 
+.zombie{
+position: absolute;
+    top: 0px;
+    left: 224px;
 }
