@@ -22,30 +22,27 @@ describe('Game Class', ()=>{
 
 	describe("Game Properties", ()=>{
 		it('should have a state', ()=>{
-			expect(game.state).to.be.a('number');
+			expect(game.state).to.equal(0);
 		});
-		it('should have a board',()=>{
-			expect(game.board).to.be.a('string');
-		});
-		it('should have a start screen', ()=>{
-			expect(game.startScreen).to.be.a('string');
-		});
-		it('should have a win screen', ()=>{
-			expect(game.winScreen).to.be.a('string');
-		});
-		it('should have a lose screen',()=>{
-			expect(game.loseScreen).to.be.a('string');
+		it('should have a level', ()=>{
+			expect(game.level).to.equal(1);
 		});
 	});
 	describe("Game Actions", ()=>{
-		it('should start a new game when the player presses a key', ()=>{
-			expect(game.start).to.be.a('function');
+		it('should show an intro when the game begins', () =>{
+			expect(game.intro).to.be.a('function');
 		});
-		it('should end the game with the player wins', ()=>{
+		it('should generate a game board when a new game begins', ()=>{
+			expect(game.makeBoard).to.be.a('function');
+		});
+		it('should end the game when the player wins and show a win screen', ()=>{
 			expect(game.youWin).to.be.a('function');
 		});
-		it('should end the game when the player dies', ()=>{
+		it('should end the game when the player dies and show a lose screen', ()=>{
 			expect(game.gameOver).to.be.a('function');
+		});
+		it('should move to the next level when all zombies are dead', ()=>{
+			expect(game.levelUp).to.be.a('function');
 		});
 	});
 });
