@@ -2,7 +2,7 @@
 import chai from 'chai';
 
 // Import Any Files to Test
-import { Player, Zombie, Gun } from '../src/js/characters';
+import { Player, Zombie, Gun } from '../src/js/classes';
 
 // Set Chai Constants
 const expect = chai.expect;
@@ -88,6 +88,11 @@ describe('Zombie Class', function(){
 	  	it('should have a sound for when it dies', ()=>{
 	  		expect(zombie.deathScream).to.be.a('string');
 	  	});
+	  	it('should have an x position on the game board', ()=>{
+	  		expect(zombie.position.x).to.be.a('number');
+	  	});
+	  	it('should have a y position on the game board', ()=>{
+	  		expect(zombie.position.y).to.be.a('number');
 	});
   	describe('Zombie actions', ()=>{
   		it('should be able to change its position left on the board', ()=>{
