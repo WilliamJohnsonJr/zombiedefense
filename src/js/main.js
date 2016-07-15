@@ -7,7 +7,7 @@ function startGame(){
 	console.log(game.createBoard);
 	game.createPlayer();
 	game.createGun();
-	game.level = 9;
+	game.level = 1;
 	game.createZombies();
 	window.addEventListener('keydown', function(event){
 		event.preventDefault();

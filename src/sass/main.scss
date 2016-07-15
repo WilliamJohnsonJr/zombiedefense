@@ -29,10 +29,12 @@
 	position: absolute;
     top: 450px;
     left: 224px;
+    z-index: 2;
 }
 
 .zombie{
 position: absolute;
     top: 0px;
     left: 0px;
+    z-index: 1;
 }

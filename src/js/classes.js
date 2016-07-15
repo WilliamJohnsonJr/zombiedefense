@@ -30,8 +30,8 @@ class Game {
 		$(".board").append(`<div id="player">
 			<img src=${player.image}>
 		</div>`);
-		document.getElementById('player').style.left = player.position.x;
-		document.getElementById('player').style.top = player.position.y;
+		document.getElementById('player').style.left = player.position.x +"px";
+		document.getElementById('player').style.top = player.position.y +"px";
 	};
 
 	createGun(){
@@ -107,19 +107,17 @@ class Player {
 	attack(){
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
-		let zombiePositionYArray = [];
-		zombieArray.forEach(function(zombie){
-			zombiePositionYArray.push(zombie.position.y);
-		});
 		zombieArray.forEach((zombie) =>{
-			let zombPos = zombie.position.x + 15;
-			let playerPos = this.position.x+76;
-			let difference = zombPos - playerPos;
-			let modZombieYPos = zombie.position.y+50;
-			let closestZombie = zombiePositionYArray.reduce(function(a, b){
-					return Math.max(a, b) + 50; // Only allows zombies in front to get shot.
-				});
-			if ( Math.abs(difference) < 15){
+
+			console.log("Zombie X: " + zombie.position.x);
+			console.log("Zombie Y: "+zombie.position.y);
+			console.log("Player X: " + this.position.x);
+			console.log("Player Y: "+ this.position.y);
+			// let zombPos = zombie.position.x + 15;
+			// let playerPos = this.position.x+76;
+			// let difference = zombPos - playerPos;
+		
+			if ( Math.abs(difference) < 10){
 						zombie.grunt();
 						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
@@ -127,6 +125,10 @@ class Player {
 		});
 
 		// && modZombieYPos >= closestZombie  Add this to if (Math.abs(difference)...) to only let zombie in front get shot
+			// let modZombieYPos = zombie.position.y+50;
+			// let closestZombie = zombiePositionYArray.reduce(function(a, b){
+			// 		return Math.max(a, b) + 50; // Only allows zombies in front to get shot.
+			// 	});
 
 		function imageReset() {
 			$("#player").html(`<img src='${this.image}'>`);
@@ -168,7 +170,7 @@ class Zombie{
 		this.id = '';
 		this.index = '';
 		this.hitpoints = 3;
-		this.moveSpeed = (Math.random()*30);
+		this.moveSpeed = (Math.random()*20);
 		this.image = "./images/zombieWalk.gif";
 		this.shotImage = "./images/zombieShot.png";
 		this.attackImage = "./images/zombieAttack.gif";
@@ -183,8 +185,14 @@ class Zombie{
 	};
 
 	moveTowardPlayer(){
-		let xdifference = (player.position.x +75) - this.position.x;
-		let ydifference = (player.position.y -100) - this.position.y;
+		let xdifference = (player.position.x +36) - this.position.x;
+		let ydifference = (player.position.y -105) - this.position.y;
+
+		let xdifferenceAbs = Math.abs(xdifference);
+
+		if (ydifference <=10 && xdifferenceAbs <= 10){
+			this.attack();
+		};
 
 		if (xdifference > 0) {
 			this.position.x += this.moveSpeed;
@@ -197,9 +205,7 @@ class Zombie{
 		if (ydifference > 5) {
 			this.position.y += this.moveSpeed;;
 			$("#"+this.id).animate({"top": `+=${this.moveSpeed}px`}, "fast");
-		} else if (ydifference <=5 ){
-			this.attack();
-		};
+		} 
 	};
 
 	grunt(){
