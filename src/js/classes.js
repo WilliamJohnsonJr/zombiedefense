@@ -91,32 +91,20 @@ class Player {
 		this.gun = {};
 		this.position = {
 			x: 224,
-			y: 450
+			y: 500
 		}
 	}
 
 	attack(){
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
-		let zombieLocations = [];
-		zombieArray.forEach(function(zombie){
-			let newZombieObj = {
-				position: zombie.position.x,
-				index: zombie.index
-			};
-			zombieLocations.push(newZombieObj);
-		});
-		for (var x=0; x<zombieLocations.length; x++){
-			if (this.position.x < zombieLocations[x].position < (this.position.x +100)){
-				zombieArray.forEach(function(zombie){
-					if(zombie.index===zombieLocations[x].index){
+		zombieArray.forEach((zombie) =>{
+			if (Math.abs((zombie.position.x+15) - (this.position.x + 76)) < 10){
 						zombie.grunt();
 						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
-					};
-				});
-			};	
-		};
+			};
+		});
 		$("#player").html(`<img src=${this.image}>`);
 	};
 	moveLeft(){
