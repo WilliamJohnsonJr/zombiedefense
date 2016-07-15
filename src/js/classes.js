@@ -97,6 +97,7 @@ class Player {
 
 	attack(){
 		gun.fire();
+		$("#player").html(`<img src=${this.attackImage}>`);
 		let zombieLocations = [];
 		zombieArray.forEach(function(zombie){
 			let newZombieObj = {
@@ -116,6 +117,7 @@ class Player {
 				});
 			};	
 		};
+		$("#player").html(`<img src=${this.image}>`);
 	};
 	moveLeft(){
 		this.position.x -= 5;
