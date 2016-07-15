@@ -13,6 +13,8 @@ function startGame(){
 		event.preventDefault();
 		if (event.code==="Space"){
 			player.attack();
+			game.levelUp();
+			game.youWin();
 		} else if (event.code==="KeyA"){
 			player.moveLeft();
 		} else if (event.code==="KeyD"){

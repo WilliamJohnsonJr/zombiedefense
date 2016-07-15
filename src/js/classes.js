@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-let player, gun;
+let player, gun, game;
 let zombieArray = [];
 
 class Game {
@@ -71,7 +71,10 @@ class Game {
 	};
 
 	levelUp(){
-		this.level += 1;
+		if(zombieArray.length===0){
+			this.level += 1;
+			this.youWin();
+		}
 	};
 
 };
