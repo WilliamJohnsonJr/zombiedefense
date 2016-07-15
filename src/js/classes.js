@@ -106,7 +106,7 @@ class Player {
 			if (this.position.x < zombieLocations[x].position < (this.position.x +100)){
 				zombieArray.forEach(function(zombie){
 					if(zombie.index===zombieLocations[x].index){
-						zombie.hitpoints -= 1;
+						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
 					};
 				});
@@ -180,7 +180,11 @@ class Zombie{
 			this.image = this.deathImage;
 			$("#"+`${this.id}`).remove();
 			zombieArray.splice(this.index, 1);
+			for(var x=0; x<zombieArray.length; x++){
+				zombieArray[x].index = x;
+			};
 		};
+		console.log(zombieArray);
 	};
 	scream() {
 		var audio = new Audio(this.deathSound);
