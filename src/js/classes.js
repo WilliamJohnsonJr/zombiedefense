@@ -72,7 +72,7 @@ class Game {
 	};
 
 	gameOver(){
-		if (this.state === 2) {
+		{
 			alert("You lose");
 		};
 	};
@@ -81,6 +81,7 @@ class Game {
 		if(zombieArray.length===0){
 			this.level += 1;
 			this.youWin();
+			zombieArray = [];
 			this.createZombies();
 			this.zombieMovement();
 		};
@@ -105,37 +106,24 @@ class Player {
 	}
 
 	attack(){
-		gun.fire();
+		// gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
 		zombieArray.forEach((zombie) =>{
-
-			console.log("Zombie X: " + zombie.position.x);
-			console.log("Zombie Y: "+zombie.position.y);
-			console.log("Player X: " + this.position.x);
-			console.log("Player Y: "+ this.position.y);
-			// let zombPos = zombie.position.x + 15;
-			// let playerPos = this.position.x+76;
-			// let difference = zombPos - playerPos;
-		
-			if ( Math.abs(difference) < 10){
-						zombie.grunt();
-						zombie.hitpoints -= gun.power;
-						zombie.checkVitals();
+			let xdifference = (this.position.x +37) - zombie.position.x;
+			let ydifference = (this.position.y -105) - zombie.position.y;
+			let xdifferenceAbs = Math.abs(xdifference);
+			if (xdifferenceAbs <= 20){
+				zombie.grunt();
+				zombie.hitpoints -= gun.power;
+				zombie.checkVitals();		
 			};
 		});
-
-		// && modZombieYPos >= closestZombie  Add this to if (Math.abs(difference)...) to only let zombie in front get shot
-			// let modZombieYPos = zombie.position.y+50;
-			// let closestZombie = zombiePositionYArray.reduce(function(a, b){
-			// 		return Math.max(a, b) + 50; // Only allows zombies in front to get shot.
-			// 	});
-
 		function imageReset() {
 			$("#player").html(`<img src='${this.image}'>`);
 		};
 		var timeoutID = window.setTimeout(imageReset.bind(this), 200);
-		// window.clearTimeout(timeoutID);
 	};
+
 	moveLeft(){
 		this.position.x -= 20;
 		// $("#player").animate({"left": "-=20px"}, "fast"); This code causes the stack to overflow if the button is held down.
@@ -155,7 +143,7 @@ class Player {
 
 	checkVitals(){
 		if(player.hitpoints === 0){
-			alert('You Lose!');
+			game.gameOver();
 		};
 	};
 
@@ -185,7 +173,7 @@ class Zombie{
 	};
 
 	moveTowardPlayer(){
-		let xdifference = (player.position.x +36) - this.position.x;
+		let xdifference = (player.position.x +37) - this.position.x;
 		let ydifference = (player.position.y -105) - this.position.y;
 
 		let xdifferenceAbs = Math.abs(xdifference);
@@ -233,6 +221,7 @@ class Zombie{
 		player.hitpoints -= 1;
 		var audio = new Audio(this.attackSound);
 		audio.play();
+		console.log(zombieArray);
 	};
 
 };
