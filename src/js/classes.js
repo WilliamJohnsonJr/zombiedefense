@@ -66,7 +66,7 @@ class Game {
 	};
 
 	youWin(){
-		if(this.level === 10) {
+		if(this.level === 13) {
 			alert("You win!");
 		};
 	};
@@ -81,7 +81,9 @@ class Game {
 		if(zombieArray.length===0){
 			this.level += 1;
 			this.youWin();
-		}
+			this.createZombies();
+			this.zombieMovement();
+		};
 	};
 
 };
@@ -110,32 +112,38 @@ class Player {
 			zombiePositionYArray.push(zombie.position.y);
 		});
 		zombieArray.forEach((zombie) =>{
-			if ((Math.abs((zombie.position.x+15) - (this.position.x + 76)) < 15) &&
-				((zombie.position.y +50) >= zombiePositionYArray.reduce(function(a, b){
-					return Math.max(a, b);
-				})+50)){
+			let zombPos = zombie.position.x + 15;
+			let playerPos = this.position.x+76;
+			let difference = zombPos - playerPos;
+			let modZombieYPos = zombie.position.y+50;
+			let closestZombie = zombiePositionYArray.reduce(function(a, b){
+					return Math.max(a, b) + 50; // Only allows zombies in front to get shot.
+				});
+			if ( Math.abs(difference) < 15){
 						zombie.grunt();
 						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
 			};
 		});
 
+		// && modZombieYPos >= closestZombie  Add this to if (Math.abs(difference)...) to only let zombie in front get shot
+
 		function imageReset() {
-			$("#player").html("<img src=\"./images/playerImage.png\">");
+			$("#player").html(`<img src='${this.image}'>`);
 		};
-		window.setTimeout(imageReset, 200);
-		window.clearTimeout(imageReset);
+		var timeoutID = window.setTimeout(imageReset.bind(this), 200);
+		// window.clearTimeout(timeoutID);
 	};
 	moveLeft(){
 		this.position.x -= 20;
-		$("#player").animate({"left": "-=20px"}, "fast");
-		// document.getElementById('player').style.left = this.position.x +"px"
+		// $("#player").animate({"left": "-=20px"}, "fast"); This code causes the stack to overflow if the button is held down.
+		document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	moveRight() {
 		this.position.x += 20;
-		$("#player").animate({"left": "+=20px"}, "fast")
-		// document.getElementById('player').style.left = this.position.x +"px"
+		// $("#player").animate({"left": "+=20px"}, "fast") This code causes the stack to overflow if the button is held down.
+		document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	grunt(){
@@ -160,7 +168,7 @@ class Zombie{
 		this.id = '';
 		this.index = '';
 		this.hitpoints = 3;
-		this.moveSpeed = (Math.random()*4);
+		this.moveSpeed = (Math.random()*30);
 		this.image = "./images/zombieWalk.gif";
 		this.shotImage = "./images/zombieShot.png";
 		this.attackImage = "./images/zombieAttack.gif";
@@ -176,20 +184,20 @@ class Zombie{
 
 	moveTowardPlayer(){
 		let xdifference = (player.position.x +75) - this.position.x;
-		let ydifference = (player.position.y -150) - this.position.y;
+		let ydifference = (player.position.y -100) - this.position.y;
 
 		if (xdifference > 0) {
-			this.position.x += 5;
+			this.position.x += this.moveSpeed;
 			$("#"+this.id).animate({"left": `+=${this.moveSpeed}px`}, "fast");
 		} else if (xdifference < 0) {
-			this.position.x -= 5;
+			this.position.x -= this.moveSpeed;
 			$("#"+this.id).animate({"left": `-=${this.moveSpeed}px`}, "fast");
 		};
 
 		if (ydifference > 5) {
-			this.position.y += 5;
-			$("#"+this.id).animate({"top": "+=5px"}, "fast");
-		} else if (ydifference <=5 && xdifference <= 5 ){
+			this.position.y += this.moveSpeed;;
+			$("#"+this.id).animate({"top": `+=${this.moveSpeed}px`}, "fast");
+		} else if (ydifference <=5 ){
 			this.attack();
 		};
 	};
