@@ -37,6 +37,7 @@ class Game {
 	createZombie(){
 		for (var x=0; x < this.level; x++){
 			let zombie = new Zombie();
+			zombie.id = x;
 			zombieArray.push(zombie);
 		};
 	};
@@ -97,23 +98,30 @@ class Player {
 		audio.play();
 	}
 
+	checkVitals(){
+		if(player.hitpoints === 0){
+			alert('You Lose!');
+		};
+	};
+
 	scream() {
 		var audio = new Audio(this.deathSound);
 		audio.play();
-	}
+	};
 };
 
 class Zombie{
 	constructor(){
+		this.id = '';
 		this.hitpoints = 3;
-		this.moveSpeed = 1;
+		this.moveSpeed = (Math.random()*4);
 		this.image = "./images/zombieWalk.gif";
 		this.shotImage = "./images/zombieShot.png";
 		this.attackImage = "./images/zombieAttack.gif";
 		this.deathImage = "./images/zombieDeath.gif";
 		this.sound = "./sounds/Zombie_Grunt.mp3";
 		this.deathSound = "./sounds/Zombie_Death_Scream.mp3";
-		this.attackSound = ".sounds/Zombie_Attack.mp3";
+		this.attackSound = "./sounds/Zombie_Attack.mp3";
 		this.position = {
 			x: (Math.random()*452),
 			y: 0
@@ -121,13 +129,13 @@ class Zombie{
 	};
 	moveLeft(){
 		if( 2 < this.position.x){
-			this.position.x -= 2;
+			this.position.x -= this.moveSpeed;
 		};
 	};
 
 	moveRight() {
 		if (this.position.x < 450){
-			this.position.x += 2;
+			this.position.x += this.moveSpeed;
 		};
 	};
 
@@ -135,7 +143,12 @@ class Zombie{
 		var audio = new Audio(this.sound);
 		audio.play();
 	}
-
+	checkVitals(){
+		if (zombie.hitpoints === 0) {
+			zombie.scream();
+			this.image = this.deathImage;
+		};
+	};
 	scream() {
 		var audio = new Audio(this.deathSound);
 		audio.play();
@@ -146,6 +159,7 @@ class Zombie{
 		var audio = new Audio(this.attackSound);
 		audio.play();
 	};
+
 };
 
 class Gun{
@@ -160,4 +174,4 @@ class Gun{
 	};
 };
 
-export { Game, player, Player, Zombie, Gun };
+export { Game, player, Player, zombieArray, Zombie, gun, Gun };

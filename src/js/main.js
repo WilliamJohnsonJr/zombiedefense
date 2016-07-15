@@ -1,12 +1,12 @@
 import $ from "jquery";
-import { Game, player, Player, Zombie, Gun } from './classes';
+import { Game, player, Player, zombieArray, Zombie, gun, Gun } from './classes';
 
 let game = new Game();
 
 game.createPlayer();
-
+game.createZombie();
+zombieArray[0].attack();
 console.log(player);
-
 // function startGame(){
 // 		//Creates a new instance of Game
 // 		let game = new Game();

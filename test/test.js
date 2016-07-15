@@ -38,7 +38,7 @@ describe('Game Class', ()=>{
 		it ('should create a gun and give it to the player when game begins', ()=>{
 			expect(game.createGun).to.be.a('function');
 		});
-		it('should create zombies according to the level', ()=>{
+		it('should create zombies and give them IDs according to the level', ()=>{
 			expect(game.createZombie).to.be.a('function');
 		});
 		it('should end the game when the player wins and show a win screen', ()=>{
@@ -110,6 +110,9 @@ describe('Player Class', function () {
   		it('should be able to make a sound when it gets bitten', ()=>{
   			expect(player.grunt).to.be.a('function');
   		});
+  		it('should know if it is still alive', ()=>{
+  			expect(player.checkVitals).to.be.a('function');
+  		});
   		it('should be able to scream when it dies', ()=>{
   			expect(player.scream).to.be.a('function');
   		});
@@ -122,6 +125,9 @@ describe('Zombie Class', function(){
 		zombie = new Zombie();
 	});
 	describe ('Zombie Class Creation', ()=>{
+		it('should have an empty id', ()=>{
+			expect(zombie.id).to.be.a('string');
+		});
 		it('should have 3 hitpoints',()=>{
   			expect(zombie.hitpoints).to.be.a('number');
   		});
@@ -159,6 +165,9 @@ describe('Zombie Class', function(){
   		});
   		it('should make a sound when it gets shot', ()=>{
   			expect(zombie.grunt).to.be.a('function');
+  		});
+  		it('should know if it is still alive', ()=>{
+  			expect(zombie.checkVitals).to.be.a('function');
   		});
   		it('should be able to scream when it dies', ()=>{
   			expect(zombie.scream).to.be.a('function');
