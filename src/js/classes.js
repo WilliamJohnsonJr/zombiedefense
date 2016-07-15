@@ -45,7 +45,6 @@ class Game {
 			zombie.id = "zombie"+x;
 			zombie.index = x;
 			zombieArray.push(zombie);
-			console.log(zombie);
 		};
 
 		let placeZombie = function(){zombieArray.forEach(function(zombie){
@@ -56,6 +55,14 @@ class Game {
 			});
 		};
 		placeZombie();
+	};
+
+	zombieMovement(){
+		function zombieMover(){zombieArray.forEach(function(zombie){
+			zombie.moveTowardPlayer();
+		})};
+
+		let zombieInterval = window.setInterval(zombieMover, 500);
 	};
 
 	youWin(){
@@ -95,7 +102,7 @@ class Player {
 		}
 	}
 
-	attack(){a
+	attack(){
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
 		let zombiePositionYArray = [];
@@ -112,7 +119,12 @@ class Player {
 						zombie.checkVitals();
 			};
 		});
-		$("#player").html(`<img src=${this.image}>`);
+
+		function imageReset() {
+			$("#player").html("<img src=\"./images/playerImage.png\">");
+		};
+		window.setTimeout(imageReset, 200);
+		window.clearTimeout(imageReset);
 	};
 	moveLeft(){
 		this.position.x -= 20;
@@ -168,16 +180,16 @@ class Zombie{
 
 		if (xdifference > 0) {
 			this.position.x += 5;
-			$("#"+this.id).animate({"left": "+=5px"}, "fast");
+			$("#"+this.id).animate({"left": `+=${this.moveSpeed}px`}, "fast");
 		} else if (xdifference < 0) {
 			this.position.x -= 5;
-			$("#"+this.id).animate({"left": "-=5px"}, "fast");
+			$("#"+this.id).animate({"left": `-=${this.moveSpeed}px`}, "fast");
 		};
 
-		if (ydifference > 0) {
+		if (ydifference > 5) {
 			this.position.y += 5;
 			$("#"+this.id).animate({"top": "+=5px"}, "fast");
-		} else if (ydifference === 0){
+		} else if (ydifference <=5 && xdifference <= 5 ){
 			this.attack();
 		};
 	};
@@ -196,7 +208,6 @@ class Zombie{
 				zombieArray[x].index = x;
 			};
 		};
-		console.log(zombieArray);
 	};
 	scream() {
 		var audio = new Audio(this.deathSound);
