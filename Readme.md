@@ -33,6 +33,13 @@ About: Zombie in pain sound. for zombie death, or impact. great for a game. zomb
 Uploaded: 09.22.09 | License: Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/); no changes were made to the original file. | Recorded by Mike Koenig | File Size: 307 KB | Downloads: 133535
 4.46 out of 5 with 74 user reviews
 
+File: Zombie_Attack.mp3
+Source url: http://soundbible.com/1035-Zombie-Moan.html
+Title: Zombie Moan
+About: Zombie moaning sound effect. zombie sounds requested by jordangiese.
+Uploaded: 09.23.09 | License: Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/); no changes were made to the original file. | Recorded by Mike Koenig | File Size: 217 KB | Downloads: 66887
+4.43 out of 5 with 76 user reviews
+
 File: Pistol.mp3
 Title: 40 Smith Wesson
 Source url: http://soundbible.com/2122-40-Smith-Wesson.html
