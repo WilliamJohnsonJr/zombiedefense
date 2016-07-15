@@ -27,6 +27,11 @@ class Game {
 
 	createPlayer(){
 		player= new Player();
+		$(".board").append(`<div id="player">
+			<img src=${player.image}>
+		</div>`);
+		document.getElementById('player').style.left = player.position.x;
+		document.getElementById('player').style.top = player.position.y;
 	};
 
 	createGun(){
@@ -34,12 +39,23 @@ class Game {
 		player.gun = gun;
 	};
 
-	createZombie(){
+	createZombies(){
 		for (var x=0; x < this.level; x++){
 			let zombie = new Zombie();
-			zombie.id = x;
+			zombie.id = "zombie"+x;
+			zombie.index = x;
 			zombieArray.push(zombie);
+			console.log(zombie);
 		};
+
+		let placeZombie = function(){zombieArray.forEach(function(zombie){
+				$(".board").append(`<div class="zombie" id="${zombie.id}">
+					<img src=${zombie.image}>
+ 				</div>`);
+ 				document.getElementById(zombie.id).style.left = zombie.position.x +"px";
+			});
+		};
+		placeZombie();
 	};
 
 	youWin(){
@@ -77,20 +93,34 @@ class Player {
 	}
 
 	attack(){
+		gun.fire();
+		let zombieLocations = [];
 		zombieArray.forEach(function(zombie){
-			gun.fire();
-			if( this.position.x < zombie.position.x < (this.position.x + 100)){
-				zombie.hitpoints -= 1;
+			let newZombieObj = {
+				position: zombie.position.x,
+				index: zombie.index
 			};
-		});	
+			zombieLocations.push(newZombieObj);
+		});
+		for (var x=0; x<zombieLocations.length; x++){
+			if (this.position.x < zombieLocations[x].position < (this.position.x +100)){
+				zombieArray.forEach(function(zombie){
+					if(zombie.index===zombieLocations[x].index){
+						zombie.hitpoints -= 1;
+						zombie.checkVitals();
+					};
+				});
+			};	
+		};
 	};
-
 	moveLeft(){
-		this.position.x -= 2;
+		this.position.x -= 5;
+		document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	moveRight() {
-		this.position.x += 2;
+		this.position.x += 5;
+		document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	grunt(){
@@ -113,6 +143,7 @@ class Player {
 class Zombie{
 	constructor(){
 		this.id = '';
+		this.index = '';
 		this.hitpoints = 3;
 		this.moveSpeed = (Math.random()*4);
 		this.image = "./images/zombieWalk.gif";
@@ -144,9 +175,11 @@ class Zombie{
 		audio.play();
 	}
 	checkVitals(){
-		if (zombie.hitpoints === 0) {
-			zombie.scream();
+		if (this.hitpoints === 0) {
+			this.scream();
 			this.image = this.deathImage;
+			$("#"+`${this.id}`).remove();
+			zombieArray.splice(this.index, 1);
 		};
 	};
 	scream() {

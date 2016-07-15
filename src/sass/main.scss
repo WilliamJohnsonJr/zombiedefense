@@ -1,15 +1,10 @@
-* {
-	border: 1px solid black;
-	box-sizing: border-box;
-}
-
 .container {
 	display: flex;
 	justify-content: center;
 }
 
 .screen {
-
+	margin: 20px auto;
 }
 
 .board {
@@ -26,6 +21,8 @@
 	height: 50px;
 	width: 50px;
 	background-color: lightblue;
+	border: 1px solid black;
+	box-sizing: border-box;
 }
 
 #player{
@@ -37,5 +34,5 @@
 .zombie{
 position: absolute;
     top: 0px;
-    left: 224px;
+    left: 0px;
 }
