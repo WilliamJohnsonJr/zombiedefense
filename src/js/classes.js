@@ -62,9 +62,10 @@ class Game {
 class Player {
 	constructor(){
 		this.hitpoints = 3;
-		this.image = "http://placecage.com/50/50";
-		this.biteImage = "http://placehold.it/50/E8117F/000000";
-		this.biteImage2 = "http://placehold.it/50/C41D21/000000";
+		this.image = "./images/playerImage.png";
+		this.biteImage = "./images/playerImageHurt.png";
+		this.deadImage = "./images/playerDead.png";
+		this.attackImage = "./images/playerAttack.png"
 		this.sound = "./sounds/Pain.mp3";
 		this.deathSound = "./sounds/Psycho_Scream.mp3";
 		this.gun = {};
@@ -73,6 +74,15 @@ class Player {
 			y: 450
 		}
 	}
+
+	attack(){
+		zombieArray.forEach(function(zombie){
+			gun.fire();
+			if( this.position.x < zombie.position.x < (this.position.x + 100)){
+				zombie.hitpoints -= 1;
+			};
+		});	
+	};
 
 	moveLeft(){
 		this.position.x -= 2;
@@ -97,9 +107,10 @@ class Zombie{
 	constructor(){
 		this.hitpoints = 3;
 		this.moveSpeed = 1;
-		this.image = "http://placekitten.com/50/50";
-		this.shotImage = "http://placehold.it/50/E8117F/000000";
-		this.shotImage2 = "http://placehold.it/50/C41D21/000000";
+		this.image = "./images/zombieWalk.gif";
+		this.shotImage = "./images/zombieShot.png";
+		this.attackImage = "./images/zombieAttack.gif";
+		this.deathImage = "./images/zombieDeath.gif";
 		this.sound = "./sounds/Zombie_Grunt.mp3";
 		this.deathSound = "./sounds/Zombie_Death_Scream.mp3";
 		this.attackSound = ".sounds/Zombie_Attack.mp3";
@@ -138,7 +149,15 @@ class Zombie{
 };
 
 class Gun{
+	constructor (){
+		this.power = 1;
+		this.gunshot = "./sounds/Pistol.mp3";
+	};
 
+	fire(){
+		let audio = new Audio(this.gunshot);
+		audio.play();
+	};
 };
 
 export { Game, player, Player, Zombie, Gun };

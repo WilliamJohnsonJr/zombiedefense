@@ -72,14 +72,17 @@ describe('Player Class', function () {
 	  	it('should have an image', () =>{
 	  		expect(player.image).to.be.a('string');
 	  	});
-	  	it('should have an image for when it is bitten once', ()=>{
+	  	it('should have an image for when it is bitten', ()=>{
 	  		expect(player.biteImage).to.be.a('string');
 	  	});
-	  	it('should have an image for when it is bitten twice', ()=>{
-	  		expect(player.biteImage2).to.be.a('string');
+	  	it('should have an image for when it is dead', ()=>{
+	  		expect(player.deadImage).to.be.a('string');
 	  	});
 	  	it('should have a sound for when it is bitten', () => {
 	  		expect(player.sound).to.be.a('string');
+	  	});
+	  	it('should have an image for when it attacks', ()=>{
+	  		expect(player.attackImage).to.be.a('string');
 	  	});
 	  	it('should have a gun', ()=>{
 	  		expect(player.gun).to.be.a('object');
@@ -95,6 +98,9 @@ describe('Player Class', function () {
 	  	});
   	});
   	describe('Player actions', ()=>{
+  		it('should be able to attack the zombie', ()=>{
+  			expect(player.attack).to.be.a('function');
+  		});
   		it('should be able to change its position left on the board', ()=>{
   			expect(player.moveLeft).to.be.a('function');
   		});
@@ -127,9 +133,6 @@ describe('Zombie Class', function(){
 	  	});
 	  	it('should have an image for when it gets shot', ()=>{
 	  		expect(zombie.shotImage).to.be.a('string');
-	  	});
-	  	it('should have an image for when it gets shot twice', ()=>{
-	  		expect(zombie.shotImage2).to.be.a('string');
 	  	});
 	  	it('should have a sound for when it is shot', ()=>{
 	  		expect(zombie.sound).to.be.a('string');
@@ -170,22 +173,16 @@ describe('Gun Class', function(){
 		gun = new Gun();
 	});
 	describe('Gun Class Creation', ()=>{
-		it('should have an image', ()=>{
-			expect(gun.image).to.be.a('string');
-		});
-		it('should have an image for when it fires', ()=>{
-			expect(gun.fireImage).to.be.a('string');
-		});
 		it('should have a power rating',()=>{
 			expect(gun.power).to.be.a('number');
 		});
+		it('should have a sound for when it fires', ()=>{
+			expect(gun.gunshot).to.be.a('string');
+		});
 	});
 	describe('Gun actions', ()=>{
-		it('should make a sound when it fires', ()=>{
-			expect(gun.shot).to.be.a('function');
-		});
-		it('should fire when the user pushes a button if it has bullets', ()=>{
-			expect(gun.attack).to.be.a('function');
+		it('should make a sound when it fires and hurt the zombie', ()=>{
+			expect(gun.fire).to.be.a('function');
 		});
 	});
 });

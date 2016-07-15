@@ -2,15 +2,26 @@
 
 A game.
 
+//////////////////////////////////////////
+Graphics from:
 
+Player graphics by Bleed. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); these images were cropped from the original images, because the original images contained 4 or more images for movement.
+Source URL: http://opengameart.org/content/tmim-heroine-bleeds-game-art
+
+Bleed's portfolio can be found here: http://remusprites.carbonmade.com/
+
+Zombie graphics by irmirx. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); no changes were made to the original images, other than converting into GIFs.
+Source URL: http://opengameart.org/content/zombie-animations
+
+///////////////////////////////////////////
 Sound Effects from:
 
 File: Pain.mp3
-Title: Pain
-Source url: http://soundbible.com/1454-Pain.html
-About: Sound of someone in pain. great for a fight or death scene in a movie.
-Uploaded: 05.31.10 | License: Sampling Plus 1.0 (https://creativecommons.org/licenses/sampling+/1.0/) | Recorded by thecheeseman | File Size: 152 KB | Downloads: 106403
-4.54 out of 5 with 84 user reviews
+Title: Female Sigh
+Source url: http://soundbible.com/132-Female-Sigh.html
+About: Female sighing sound simple woman sound
+Uploaded: 05.05.09 | License: Public Domain | Recorded by PD Ezwa | File Size: 240 KB | Downloads: 35628
+4.42 out of 5 with 95 user reviews
 
 File: Psycho_Scream.mp3
 Title: Psycho Scream
