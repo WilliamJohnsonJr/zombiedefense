@@ -21,6 +21,14 @@ function startGame(){
 			player.moveRight();
 		};
 	});
+	zombieArray[1].moveTowardPlayer();
+	console.log(zombieArray[1].position.x);
+	zombieArray[1].moveTowardPlayer();
+	console.log(zombieArray[1].position.x);
+	zombieArray[1].moveTowardPlayer();
+	console.log(zombieArray[1].position.x);
+	zombieArray[1].moveTowardPlayer();
+	console.log(zombieArray[1].position.x);
 };
 
 startGame();

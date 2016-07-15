@@ -41,6 +41,9 @@ describe('Game Class', ()=>{
 		it('should create zombies and give them IDs according to the level', ()=>{
 			expect(game.createZombies).to.be.a('function');
 		});
+		it('should start the zombie movement toward player', ()=>{
+			expect(game.zombieMovement).to.be.a('function');
+		});
 		it('should end the game when the player wins and show a win screen', ()=>{
 			expect(game.youWin).to.be.a('function');
 		});
@@ -157,11 +160,8 @@ describe('Zombie Class', function(){
 	  	});
 	});
   	describe('Zombie actions', ()=>{
-  		it('should be able to change its position left on the board', ()=>{
-  			expect(zombie.moveLeft).to.be.a('function');
-  		});
-  		it('should be able to change its position right on the board', ()=>{
-  			expect(zombie.moveRight).to.be.a('function');
+  		it('should move toward the player', ()=>{
+  			expect(zombie.moveTowardPlayer).to.be.a('function');
   		});
   		it('should be able to attack the player', ()=>{
   			expect(zombie.attack).to.be.a('function');

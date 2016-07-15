@@ -91,15 +91,22 @@ class Player {
 		this.gun = {};
 		this.position = {
 			x: 224,
-			y: 500
+			y: 450
 		}
 	}
 
-	attack(){
+	attack(){a
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
+		let zombiePositionYArray = [];
+		zombieArray.forEach(function(zombie){
+			zombiePositionYArray.push(zombie.position.y);
+		});
 		zombieArray.forEach((zombie) =>{
-			if (Math.abs((zombie.position.x+15) - (this.position.x + 76)) < 10){
+			if ((Math.abs((zombie.position.x+15) - (this.position.x + 76)) < 15) &&
+				((zombie.position.y +50) >= zombiePositionYArray.reduce(function(a, b){
+					return Math.max(a, b);
+				})+50)){
 						zombie.grunt();
 						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
@@ -108,13 +115,15 @@ class Player {
 		$("#player").html(`<img src=${this.image}>`);
 	};
 	moveLeft(){
-		this.position.x -= 5;
-		document.getElementById('player').style.left = this.position.x +"px"
+		this.position.x -= 20;
+		$("#player").animate({"left": "-=20px"}, "fast");
+		// document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	moveRight() {
-		this.position.x += 5;
-		document.getElementById('player').style.left = this.position.x +"px"
+		this.position.x += 20;
+		$("#player").animate({"left": "+=20px"}, "fast")
+		// document.getElementById('player').style.left = this.position.x +"px"
 	}
 
 	grunt(){
@@ -152,15 +161,24 @@ class Zombie{
 			y: 0
 		};
 	};
-	moveLeft(){
-		if( 2 < this.position.x){
-			this.position.x -= this.moveSpeed;
-		};
-	};
 
-	moveRight() {
-		if (this.position.x < 450){
-			this.position.x += this.moveSpeed;
+	moveTowardPlayer(){
+		let xdifference = (player.position.x +75) - this.position.x;
+		let ydifference = (player.position.y -150) - this.position.y;
+
+		if (xdifference > 0) {
+			this.position.x += 5;
+			$("#"+this.id).animate({"left": "+=5px"}, "fast");
+		} else if (xdifference < 0) {
+			this.position.x -= 5;
+			$("#"+this.id).animate({"left": "-=5px"}, "fast");
+		};
+
+		if (ydifference > 0) {
+			this.position.y += 5;
+			$("#"+this.id).animate({"top": "+=5px"}, "fast");
+		} else if (ydifference === 0){
+			this.attack();
 		};
 	};
 
