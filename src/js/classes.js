@@ -109,6 +109,7 @@ class Player {
 			if (this.position.x < zombieLocations[x].position < (this.position.x +100)){
 				zombieArray.forEach(function(zombie){
 					if(zombie.index===zombieLocations[x].index){
+						zombie.grunt();
 						zombie.hitpoints -= gun.power;
 						zombie.checkVitals();
 					};
@@ -195,6 +196,7 @@ class Zombie{
 	}
 
 	attack(){
+		player.grunt();
 		player.hitpoints -= 1;
 		var audio = new Audio(this.attackSound);
 		audio.play();
@@ -205,7 +207,7 @@ class Zombie{
 class Gun{
 	constructor (){
 		this.power = 1;
-		this.gunshot = "./sounds/Pistol.mp3";
+		this.gunshot = "./sounds/Shotgun.mp3";
 	};
 
 	fire(){

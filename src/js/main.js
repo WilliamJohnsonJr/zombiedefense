@@ -21,6 +21,7 @@ function startGame(){
 			player.moveRight();
 		};
 	});
+	zombieArray[0].attack();
 };
 
 startGame();
