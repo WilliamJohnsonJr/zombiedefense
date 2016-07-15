@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+let player, zombie, gun;
+
 class Game {
 	constructor(){
 
@@ -22,6 +24,10 @@ class Game {
 		};
 	}
 
+	createPlayer(){
+		player= new Player();
+	}
+
 	youWin(){
 		if(this.level === 10) {
 			alert("You win!");
@@ -42,21 +48,14 @@ class Game {
 
 };
 
-class Board {
-	constructor(level){
-
-	}
-
-}
-
 class Player {
 	constructor(){
 		this.hitpoints = 3;
 		this.image = "http://placecage.com/50/50";
 		this.biteImage = "http://placekitten.com/50/50";
 		this.biteImage2 = "http://placehold.it/50/ffffff/000000"
-		this.sound = "../../app/sounds/Pain.mp3";
-		this.deathSound = "../../app/sounds/Psycho_Scream.mp3";
+		this.sound = "./sounds/Pain.mp3";
+		this.deathSound = "./sounds/Psycho_Scream.mp3";
 	}
 
 	scream() {
@@ -75,4 +74,4 @@ class Gun{
 
 };
 
-export { Game, Player, Zombie, Gun };
+export { Game, player, Player, Zombie, Gun };

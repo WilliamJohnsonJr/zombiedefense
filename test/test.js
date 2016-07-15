@@ -29,11 +29,14 @@ describe('Game Class', ()=>{
 		});
 	});
 	describe("Game Actions", ()=>{
-		it('should show an intro when the game begins', () =>{
-			expect(game.intro).to.be.a('function');
-		});
 		it('should generate a game board when a new game begins', ()=>{
 			expect(game.makeBoard).to.be.a('function');
+		});
+		it('should create a player when a new game begins', ()=>{
+			expect(game.createPlayer).to.be.a('function');
+		});
+		it('should create zombies according to the level', ()=>{
+			expect(game.createZombie).to.be.a('function');
 		});
 		it('should end the game when the player wins and show a win screen', ()=>{
 			expect(game.youWin).to.be.a('function');
@@ -52,13 +55,12 @@ describe('Player Class', function () {
 
 	beforeEach(()=>{
 		player = new Player();
-	})
-  describe('Class Creation', function () {
-
-    it('should be an instance of Player', function () {
-      expect(player).to.be.an.instanceof(Player);
-    });
-  });
+	});
+  	describe('Class Creation', function () {
+    	it('should be an instance of Player', ()=>{
+    		expect(player).to.be.an.instanceof(Player);
+    	});
+	});
 
   describe('Player properties', () => {
 	  	it('should have 3 hitpoints',()=>{
@@ -76,6 +78,9 @@ describe('Player Class', function () {
 	  	it('should have a sound for when it is bitten', () => {
 	  		expect(player.sound).to.be.a('string');
 	  	});
+	  	it('should have a gun', ()=>{
+	  		expect(player.gun).to.be.a('object');
+	  	});
 	  	it('should have a sound for when it dies', ()=>{
 	  		expect(player.deathSound).to.be.a('string');
 	  	});
@@ -92,6 +97,9 @@ describe('Player Class', function () {
   		});
   		it('should be able to change its position right on the board', ()=>{
   			expect(player.moveRight).to.be.a('function');
+  		});
+  		it('should be able to shoot the zombies', ()=>{
+  			expect(player.shootGun).to.be.a('function');
   		});
   		it('should be able to make a sound when it gets bitten', ()=>{
   			expect(player.grunt).to.be.a('function');
