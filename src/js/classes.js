@@ -52,12 +52,21 @@ class Game {
 	};
 
 	zombieMovement(){
-		function zombieMover(){
-				zombieArray.forEach(function(zombie){
-					zombie.moveTowardPlayer();
-				});
-		};	
-		window.setInterval(zombieMover, 500);
+			zombieArray.forEach(function(zombie){
+				if(zombie.alive ===true){
+					let xdifference = (player.position.x +37) - zombie.position.x;
+					let ydifference = (player.position.y -105) - zombie.position.y;
+					let xdifferenceAbs = Math.abs(xdifference);
+					let ydifferenceAbs = Math.abs(ydifference);
+					if (ydifferenceAbs <=20 && xdifferenceAbs <= 20){
+						zombie.attack();
+					} else {
+						zombie.moveTowardPlayer();
+					};
+				} else {
+					console.log("This zombie's dead and can't do nuthin.")
+				};			
+			});
 	};
 
 	youWin(){
@@ -135,7 +144,7 @@ class Player {
 	}
 
 	// checkVitals(){
-	// 	if(player.hitpoints === 0){
+	// 	if(player.hitpoints <= 0){
 	// 		game.gameOver();
 	// 	};
 	// };
@@ -149,6 +158,7 @@ class Player {
 class Zombie{
 	constructor(){
 		this.id = '';
+		this.alive = true;
 		this.index = '';
 		this.hitpoints = 3;
 		this.moveSpeed = (Math.random()*20);
@@ -172,23 +182,18 @@ class Zombie{
 		let xdifferenceAbs = Math.abs(xdifference);
 		let ydifferenceAbs = Math.abs(ydifference);
 
-		if (ydifferenceAbs <=10 && xdifferenceAbs <= 10){
-			player.scream();
-			game.gameOver();
-		};
-
-		if (xdifference > 0) {
+		if (xdifference > 20) {
 			this.position.x += this.moveSpeed;
 			$("#"+this.id).animate({"left": `+=${this.moveSpeed}px`}, "fast");
-		} else if (xdifference < 0) {
+		} else if (xdifference < -20) {
 			this.position.x -= this.moveSpeed;
 			$("#"+this.id).animate({"left": `-=${this.moveSpeed}px`}, "fast");
 		};
 
-		if (ydifference > 5) {
+		if (ydifference > 20) {
 			this.position.y += this.moveSpeed;;
 			$("#"+this.id).animate({"top": `+=${this.moveSpeed}px`}, "fast");
-		} 
+		} //else stop where you are.
 	};
 
 	grunt(){
@@ -196,7 +201,8 @@ class Zombie{
 		audio.play();
 	}
 	checkVitals(){
-		if (this.hitpoints === 0) {
+		if (this.hitpoints <= 0) {
+			this.alive = false;
 			this.scream();
 			$("#"+`${this.id}`).remove();
 			zombieArray.splice(this.index, 1);
@@ -213,14 +219,12 @@ class Zombie{
 		audio.play();
 	}
 
-	// attack(){
-	// 	player.grunt();
-	// 	player.hitpoints -= 1;
-	// 	var audio = new Audio(this.attackSound);
-	// 	audio.play();
-	// 	// console.log(zombieArray);
-	// 	console.log(player.hitpoints);
-	// };
+	attack(){
+		player.grunt();
+		player.hitpoints -= 1;
+		var audio = new Audio(this.attackSound);
+		audio.play();
+	};
 
 };
 

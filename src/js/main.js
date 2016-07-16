@@ -20,7 +20,7 @@ function startGame(){
 			player.moveRight();
 		};
 	});
-	game.zombieMovement();
+	window.setInterval(game.zombieMovement, 500);
 };
 
 //Test
