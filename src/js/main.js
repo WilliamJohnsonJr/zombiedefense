@@ -23,4 +23,6 @@ function startGame(){
 	game.zombieMovement();
 };
 
+//Test
+
 startGame();
