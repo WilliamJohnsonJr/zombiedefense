@@ -13,6 +13,10 @@ Bleed's portfolio can be found here: http://remusprites.carbonmade.com/
 Zombie graphics by irmirx. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); no changes were made to the original images, other than converting into GIFs.
 Source URL: http://opengameart.org/content/zombie-animations
 
+Background image by: rubberduck. Public Domain.
+File: bg-10.jpg
+Source URL: http://opengameart.org/content/40-game-backgrounds-1-painted-style-and-photorealistic
+
 ///////////////////////////////////////////
 Sound Effects from:
 

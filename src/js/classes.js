@@ -3,6 +3,7 @@ import $ from 'jquery';
 let player, gun, game;
 let zombieArray = [];
 let bodyCount = 0;
+let gameLevel;
 
 class Game {
 	constructor(){
@@ -89,6 +90,9 @@ class Game {
 	levelUp(){
 		if(zombieArray.length===0){
 			this.level += 1;
+			gameLevel = this.level;
+			console.log(this.level);
+			console.log(gameLevel);
 			this.youWin();
 			if(this.level === 7){
 				gun.power = 3;
@@ -218,7 +222,7 @@ class Zombie{
 			$("#"+`${this.id}`).remove();
 			bodyCount +=1;
 		$(".bodyCounter").remove();
-		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br>   Lives Left: ${player.hitpoints}</h3>`);					
+		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br> Level: ${gameLevel} </br>  Lives Left: ${player.hitpoints}</h3>`);					
 			zombieArray.splice(this.index, 1);
 			for(var x=0; x<zombieArray.length; x++){
 				zombieArray[x].index = x;
@@ -241,7 +245,7 @@ class Zombie{
 		$("#player").html(`<img src='${player.biteImage}'>`);				
 		player.hitpoints -=1;
 		$(".bodyCounter").remove();
-		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br>   Lives Left: ${player.hitpoints}</h3>`);					
+		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br> Level: ${gameLevel} </br>   Lives Left: ${player.hitpoints}</h3>`);					
 		if(player.hitpoints === 0){
 			player.scream();
 			function alerter(){
@@ -276,4 +280,4 @@ class Gun{
 	};
 };
 
-export { Game, bodyCount, player, Player, zombieArray, Zombie, gun, Gun };
+export { Game, bodyCount, gameLevel, player, Player, zombieArray, Zombie, gun, Gun };

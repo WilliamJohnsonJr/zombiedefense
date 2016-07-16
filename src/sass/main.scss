@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	justify-content: center;
+	background: url(./../images/bg-10.JPG);
 }
 
 .screen {
@@ -29,6 +30,7 @@
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
+	color: lightgreen;
 }
 
 #player{
@@ -43,4 +45,18 @@ position: absolute;
     top: 0px;
     left: 0px;
     z-index: 1;
+}
+
+
+h1 {
+	color: #F92672;
+	text-align: center;
+}
+
+h2 {
+	color: lightgreen;
+}
+
+h3 {
+	color: lightgreen;
 }
