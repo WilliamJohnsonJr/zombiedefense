@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 let player, gun, game;
 let zombieArray = [];
+let bodyCount = 0;
 
 class Game {
 	constructor(){
@@ -45,6 +46,11 @@ class Game {
 				$(".board").append(`<div class="zombie" id="${zombie.id}">
 					<img src=${zombie.image}>
  				</div>`);
+ 				for (var y = 0; y<zombieArray.length; y++){
+ 					if(Math.abs(zombie.position.x - zombieArray[y].position.x) <=65){
+ 						zombie.position.x+= 65;
+ 					};	
+ 				}; 				
  				document.getElementById(zombie.id).style.left = zombie.position.x +"px";
 			});
 		};
@@ -70,13 +76,16 @@ class Game {
 	};
 
 	youWin(){
-		if(this.level === 100) {
-			alert("You win!");
+		if(this.level === 9) {
+			function alerter(){
+				alert("You win!");
+				$(".zombie").remove();
+				$("#player").remove();
+				zombieArray = [];
+				$(".board").append(`<h1>Refresh page to play again!</h1>`);
+			};
+			window.setTimeout(alerter, 200);
 		};
-	};
-
-	gameOver(){
-			alert("You lose");
 	};
 
 	levelUp(){
@@ -111,13 +120,18 @@ class Player {
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
 		zombieArray.forEach((zombie) =>{
-			let xdifference = (this.position.x +37) - zombie.position.x;
+			let xdifference = (this.position.x +30) - zombie.position.x;
 			let ydifference = (this.position.y -105) - zombie.position.y;
 			let xdifferenceAbs = Math.abs(xdifference);
 			if (xdifferenceAbs <= 20){
 				zombie.grunt();
+				$("#"+zombie.id).html(`<img src='${zombie.shotImage}'>`);				
 				zombie.hitpoints -= gun.power;
 				zombie.checkVitals();		
+				function imageZombieReset(){
+					$("#"+zombie.id).html(`<img src='${zombie.image}'>`);
+				};
+				window.setTimeout(imageZombieReset, 500);
 			};
 		});
 		function imageReset() {
@@ -143,12 +157,6 @@ class Player {
 		audio.play();
 	}
 
-	// checkVitals(){
-	// 	if(player.hitpoints <= 0){
-	// 		game.gameOver();
-	// 	};
-	// };
-
 	scream() {
 		var audio = new Audio(this.deathSound);
 		audio.play();
@@ -161,11 +169,12 @@ class Zombie{
 		this.alive = true;
 		this.index = '';
 		this.hitpoints = 3;
-		this.moveSpeed = (Math.random()*20);
-		this.image = "./images/zombieWalk.gif";
+		this.moveSpeedX = 10 + (Math.random()*10);
+		this.moveSpeedY = 20 + (Math.random()*25);
+		this.image = "./images/zombieWalk.png";
 		this.shotImage = "./images/zombieShot.png";
-		this.attackImage = "./images/zombieAttack.gif";
-		this.deathImage = "./images/zombieDeath.gif";
+		this.attackImage = "./images/zombieAttack.png";
+		this.deathImage = "./images/zombieDeath.png";
 		this.sound = "./sounds/Zombie_Grunt.mp3";
 		this.deathSound = "./sounds/Zombie_Death_Scream.mp3";
 		this.attackSound = "./sounds/Zombie_Attack.mp3";
@@ -183,16 +192,16 @@ class Zombie{
 		let ydifferenceAbs = Math.abs(ydifference);
 
 		if (xdifference > 20) {
-			this.position.x += this.moveSpeed;
-			$("#"+this.id).animate({"left": `+=${this.moveSpeed}px`}, "fast");
+			this.position.x += this.moveSpeedX;
+			$("#"+this.id).animate({"left": `+=${this.moveSpeedX}px`}, "fast");
 		} else if (xdifference < -20) {
-			this.position.x -= this.moveSpeed;
-			$("#"+this.id).animate({"left": `-=${this.moveSpeed}px`}, "fast");
+			this.position.x -= this.moveSpeedX;
+			$("#"+this.id).animate({"left": `-=${this.moveSpeedX}px`}, "fast");
 		};
 
 		if (ydifference > 20) {
-			this.position.y += this.moveSpeed;;
-			$("#"+this.id).animate({"top": `+=${this.moveSpeed}px`}, "fast");
+			this.position.y += this.moveSpeedY;;
+			$("#"+this.id).animate({"top": `+=${this.moveSpeedY}px`}, "fast");
 		} //else stop where you are.
 	};
 
@@ -205,6 +214,9 @@ class Zombie{
 			this.alive = false;
 			this.scream();
 			$("#"+`${this.id}`).remove();
+			bodyCount +=1;
+		$(".bodyCounter").remove();
+		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br>   Lives Left: ${player.hitpoints}</h3>`);					
 			zombieArray.splice(this.index, 1);
 			for(var x=0; x<zombieArray.length; x++){
 				zombieArray[x].index = x;
@@ -220,12 +232,34 @@ class Zombie{
 	}
 
 	attack(){
-		player.grunt();
-		player.hitpoints -= 1;
 		var audio = new Audio(this.attackSound);
 		audio.play();
+		$("#"+this.id).html(`<img src='${this.attackImage}'>`);
+		player.grunt();
+		$("#player").html(`<img src='${player.biteImage}'>`);				
+		player.hitpoints -=1;
+		$(".bodyCounter").remove();
+		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br>   Lives Left: ${player.hitpoints}</h3>`);					
+		if(player.hitpoints === 0){
+			player.scream();
+			function alerter(){
+				alert("You Lose!");
+				$(".zombie").remove();
+				$("#player").remove();
+				zombieArray = [];
+				$(".board").append(`<h1>Refresh page to play again!</h1>`);
+			};
+			window.setTimeout(alerter, 200);
+		};
+		function imagePlayerReset(){
+			$("#player").html(`<img src='${player.image}'>`);
+		};
+		window.setTimeout(imagePlayerReset, 300);
+		function imageReset(){
+			$("#"+this.id).html(`<img src='${this.image}'>`)
+		};
+		window.setTimeout(imageReset.bind(this), 300);
 	};
-
 };
 
 class Gun{
@@ -240,4 +274,4 @@ class Gun{
 	};
 };
 
-export { Game, player, Player, zombieArray, Zombie, gun, Gun };
+export { Game, bodyCount, player, Player, zombieArray, Zombie, gun, Gun };
