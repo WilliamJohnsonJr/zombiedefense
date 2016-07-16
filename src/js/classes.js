@@ -5,12 +5,6 @@ let zombieArray = [];
 
 class Game {
 	constructor(){
-
-		// Game state 0 = Ready to start
-		// Game state 1 = Playing
-		//Game state 2 = You Lose
-		//Game state 3 = You Win
-		this.state = 0;
 		this.level = 1;
 	};
 
@@ -59,27 +53,21 @@ class Game {
 
 	zombieMovement(){
 		function zombieMover(){
-			if(zombieArray.length > 0){
 				zombieArray.forEach(function(zombie){
 					zombie.moveTowardPlayer();
 				});
-			} else {
-				window.clearInterval(zombieInterval);	
-			};
-		};
-		let zombieInterval = window.setInterval(zombieMover, 500);
+		};	
+		window.setInterval(zombieMover, 500);
 	};
 
 	youWin(){
-		if(this.level === 13) {
+		if(this.level === 100) {
 			alert("You win!");
 		};
 	};
 
 	gameOver(){
-		{
 			alert("You lose");
-		};
 	};
 
 	levelUp(){
@@ -111,7 +99,7 @@ class Player {
 	}
 
 	attack(){
-		// gun.fire();
+		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
 		zombieArray.forEach((zombie) =>{
 			let xdifference = (this.position.x +37) - zombie.position.x;
@@ -146,11 +134,11 @@ class Player {
 		audio.play();
 	}
 
-	checkVitals(){
-		if(player.hitpoints === 0){
-			game.gameOver();
-		};
-	};
+	// checkVitals(){
+	// 	if(player.hitpoints === 0){
+	// 		game.gameOver();
+	// 	};
+	// };
 
 	scream() {
 		var audio = new Audio(this.deathSound);
@@ -182,9 +170,11 @@ class Zombie{
 		let ydifference = (player.position.y -105) - this.position.y;
 
 		let xdifferenceAbs = Math.abs(xdifference);
+		let ydifferenceAbs = Math.abs(ydifference);
 
-		if (ydifference <=10 && xdifferenceAbs <= 10){
-			this.attack();
+		if (ydifferenceAbs <=10 && xdifferenceAbs <= 10){
+			player.scream();
+			game.gameOver();
 		};
 
 		if (xdifference > 0) {
@@ -208,13 +198,12 @@ class Zombie{
 	checkVitals(){
 		if (this.hitpoints === 0) {
 			this.scream();
-			this.image = this.deathImage;
 			$("#"+`${this.id}`).remove();
 			zombieArray.splice(this.index, 1);
 			for(var x=0; x<zombieArray.length; x++){
 				zombieArray[x].index = x;
 			};
-            
+            this.position.y = 800;
 			console.log(this)
 			console.log(zombieArray);
 		};
@@ -224,14 +213,14 @@ class Zombie{
 		audio.play();
 	}
 
-	attack(){
-		player.grunt();
-		player.hitpoints -= 1;
-		var audio = new Audio(this.attackSound);
-		audio.play();
-		// console.log(zombieArray);
-		console.log(player.hitpoints);
-	};
+	// attack(){
+	// 	player.grunt();
+	// 	player.hitpoints -= 1;
+	// 	var audio = new Audio(this.attackSound);
+	// 	audio.play();
+	// 	// console.log(zombieArray);
+	// 	console.log(player.hitpoints);
+	// };
 
 };
 
