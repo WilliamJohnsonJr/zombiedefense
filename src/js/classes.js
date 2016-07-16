@@ -58,10 +58,15 @@ class Game {
 	};
 
 	zombieMovement(){
-		function zombieMover(){zombieArray.forEach(function(zombie){
-			zombie.moveTowardPlayer();
-		})};
-
+		function zombieMover(){
+			if(zombieArray.length > 0){
+				zombieArray.forEach(function(zombie){
+					zombie.moveTowardPlayer();
+				});
+			} else {
+				window.clearInterval(zombieInterval);	
+			};
+		};
 		let zombieInterval = window.setInterval(zombieMover, 500);
 	};
 
@@ -209,6 +214,9 @@ class Zombie{
 			for(var x=0; x<zombieArray.length; x++){
 				zombieArray[x].index = x;
 			};
+            
+			console.log(this)
+			console.log(zombieArray);
 		};
 	};
 	scream() {
@@ -221,7 +229,8 @@ class Zombie{
 		player.hitpoints -= 1;
 		var audio = new Audio(this.attackSound);
 		audio.play();
-		console.log(zombieArray);
+		// console.log(zombieArray);
+		console.log(player.hitpoints);
 	};
 
 };
