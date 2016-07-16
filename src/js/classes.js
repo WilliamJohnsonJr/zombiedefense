@@ -45,12 +45,10 @@ class Game {
 		let placeZombie = function(){zombieArray.forEach(function(zombie){
 				$(".board").append(`<div class="zombie" id="${zombie.id}">
 					<img src=${zombie.image}>
- 				</div>`);
- 				for (var y = 0; y<zombieArray.length; y++){
- 					if(Math.abs(zombie.position.x - zombieArray[y].position.x) <=65){
- 						zombie.position.x+= 65;
- 					};	
- 				}; 				
+ 				</div>`);		
+ 				if(zombie.position.x > 490){
+ 					zombie.position.x = 10;
+ 				};
  				document.getElementById(zombie.id).style.left = zombie.position.x +"px";
 			});
 		};
@@ -76,7 +74,7 @@ class Game {
 	};
 
 	youWin(){
-		if(this.level === 9) {
+		if(this.level === 100) {
 			function alerter(){
 				alert("You win!");
 				$(".zombie").remove();
@@ -92,6 +90,10 @@ class Game {
 		if(zombieArray.length===0){
 			this.level += 1;
 			this.youWin();
+			if(this.level === 7){
+				gun.power = 3;
+				alert("You got the Super Shotgun!");
+			};
 			zombieArray = [];
 			this.createZombies();
 			this.zombieMovement();
