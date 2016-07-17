@@ -4,6 +4,10 @@ import { Game, bodyCount, gameLevel, player, Player, zombieArray, Zombie, gun, G
 $(".board").append(`<h1 class="h1">ZOMBIE DEFENSE    </br> <img src="./images/zombieWalk.png"></h1>
 					<h2 class="h2"> Can you stay alive until Level 100? </br> </br> Controls: A - move left  D - move right  Space - shoot</h2>
 					<h3 class="h3">Click to begin!</h3>`);
+
+let soundtrack = new Audio("./sounds/12ToccataAndFugueInDMinor.mp3");
+soundtrack.play();
+
 function startGame(){
 	$(".h1").remove();
 	$(".h2").remove();

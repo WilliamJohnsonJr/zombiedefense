@@ -3,6 +3,13 @@
 A game.
 
 //////////////////////////////////////////
+Music:
+J. S. Bach, "Toccata and Fugue in D Minor"
+Source URL: https://archive.org/details/ToccataAndFugueInDMinor
+Downloaded from: https://ia802605.us.archive.org/15/items/ToccataAndFugueInDMinor/12ToccataAndFugueInDMinor.mp3
+Public Domain.
+
+//////////////////////////////////////////
 Graphics from:
 
 Player graphics by Bleed. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); these images were cropped from the original images, because the original images contained 4 or more images for movement.
