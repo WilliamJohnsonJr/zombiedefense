@@ -1,6 +1,10 @@
 # Zombie Defense
 
-A game.
+A game that:
+Demonstrates an understanding of Classes & instances of them
+Demonstrates Prototypal Inheritance
+Demonstrates how to properly use test driven development with Mocha & Chai
+Marry DOM events with creating instances of Objects
 
 //////////////////////////////////////////
 Music:
