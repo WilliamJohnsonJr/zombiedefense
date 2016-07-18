@@ -56,11 +56,28 @@ h1 {
 }
 
 h2 {
-	position:relative;
-	top: 20px;
 	color: lightgreen;
+	background: black;
+	border: 2px solid lightgreen;
+	padding: 20px;
+	border-radius: 10px;
 }
 
-h3 {
-	color: lightgreen;
+.h3 {
+	width: 100%;
+}
+
+.startButton {
+	background: black;
+	color: #F92672;
+	border: 2px solid lightgreen;
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.loseBanner{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: center;
 }

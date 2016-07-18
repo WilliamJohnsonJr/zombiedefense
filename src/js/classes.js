@@ -253,7 +253,7 @@ class Zombie{
 				$(".zombie").remove();
 				$("#player").remove();
 				zombieArray = [];
-				$(".board").append(`<h1>Refresh page to play again!</h1>`);
+				$(".board").append(`<h1 class="loseBanner">Refresh page to play again!</h1>`);
 			};
 			window.setTimeout(alerter, 200);
 		};
@@ -276,7 +276,9 @@ class Gun{
 
 	fire(){
 		let audio = new Audio(this.gunshot);
+		audio.volume=0.6;
 		audio.play();
+
 	};
 };
 

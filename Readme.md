@@ -17,7 +17,7 @@ Source URL: http://opengameart.org/content/tmim-heroine-bleeds-game-art
 
 Bleed's portfolio can be found here: http://remusprites.carbonmade.com/
 
-Zombie graphics by irmirx. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); no changes were made to the original images, other than converting into GIFs.
+Zombie graphics by irmirx. License: CC-BY-3.0 (http://creativecommons.org/licenses/by/3.0/); no changes were made to the original images, other than resizing to fit scale of game.
 Source URL: http://opengameart.org/content/zombie-animations
 
 Background image by: rubberduck. Public Domain.

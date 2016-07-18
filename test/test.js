@@ -21,9 +21,6 @@ describe('Game Class', ()=>{
 	});
 
 	describe("Game Properties", ()=>{
-		it('should have a state', ()=>{
-			expect(game.state).to.equal(0);
-		});
 		it('should have a level', ()=>{
 			expect(game.level).to.equal(1);
 		});
@@ -46,9 +43,6 @@ describe('Game Class', ()=>{
 		});
 		it('should end the game when the player wins and show a win screen', ()=>{
 			expect(game.youWin).to.be.a('function');
-		});
-		it('should end the game when the player dies and show a lose screen', ()=>{
-			expect(game.gameOver).to.be.a('function');
 		});
 		it('should move to the next level when all zombies are dead', ()=>{
 			expect(game.levelUp).to.be.a('function');
@@ -113,9 +107,6 @@ describe('Player Class', function () {
   		it('should be able to make a sound when it gets bitten', ()=>{
   			expect(player.grunt).to.be.a('function');
   		});
-  		it('should know if it is still alive, and if it is dead it should remove itself from the board', ()=>{
-  			expect(player.checkVitals).to.be.a('function');
-  		});
   		it('should be able to scream when it dies', ()=>{
   			expect(player.scream).to.be.a('function');
   		});
@@ -137,8 +128,11 @@ describe('Zombie Class', function(){
 		it('should have 3 hitpoints',()=>{
   			expect(zombie.hitpoints).to.be.a('number');
   		});
-  		it('should have a certain speed that it moves at', ()=>{
-  			expect(zombie.moveSpeed).to.be.a('number');
+  		it('should have a speed that it moves at horizontally', ()=>{
+  			expect(zombie.moveSpeedX).to.be.a('number');
+  		});
+  		it('should have a speed that it moves at vertically', ()=>{
+  			expect(zombie.moveSpeedY).to.be.a('number');
   		});
 	  	it('should have an image', () =>{
 	  		expect(zombie.image).to.be.a('string');
@@ -163,7 +157,7 @@ describe('Zombie Class', function(){
   		it('should move toward the player', ()=>{
   			expect(zombie.moveTowardPlayer).to.be.a('function');
   		});
-  		it('should be able to attack the player', ()=>{
+  		it('should be able to attack the player, check to see if player is dead, and if so end the game', ()=>{
   			expect(zombie.attack).to.be.a('function');
   		});
   		it('should make a sound when it gets shot', ()=>{
