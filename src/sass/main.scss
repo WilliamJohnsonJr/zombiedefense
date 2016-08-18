@@ -2,10 +2,15 @@
 	display: flex;
 	justify-content: center;
 	background: url(./../images/bg-10.JPG);
+	background-size: cover;
 }
 
 .screen {
 	margin: 20px auto;
+}
+
+.container{
+	position: relative;
 }
 
 .board {
@@ -28,6 +33,9 @@
 
 .bodyCounter{
 	position: absolute;
+	background: black;
+	border: 2px solid lightgreen;
+	padding: 10px;
 	bottom: 0px;
 	left: 0px;
 	color: lightgreen;
@@ -80,4 +88,12 @@ h2 {
 	top: 0px;
 	left: 0px;
 	text-align: center;
+}
+
+.messages {
+	position: absolute;
+	right: 10%;
+	color: #F92672;
+	font-weight: bold;
+	font-size: 40px;
 }

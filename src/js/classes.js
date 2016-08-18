@@ -77,7 +77,8 @@ class Game {
 	youWin(){
 		if(this.level === 100) {
 			function alerter(){
-				alert("You win!");
+				$('.board').append(`<p class="messages">You Win!
+					</p>`);
 				$(".zombie").remove();
 				$("#player").remove();
 				zombieArray = [];
@@ -96,7 +97,11 @@ class Game {
 			this.youWin();
 			if(this.level === 7){
 				gun.power = 3;
-				alert("You got the Super Shotgun!");
+				$('.container').append(`<p class="messages">You got the Super Shotgun!
+					</p>`);
+			};
+			if(this.level === 8){
+				$('.messages').remove();
 			};
 			zombieArray = [];
 			this.createZombies();
@@ -249,11 +254,12 @@ class Zombie{
 		if(player.hitpoints === 0){
 			player.scream();
 			function alerter(){
-				alert("You Lose!");
+				$('.messages').remove();
+				$('.container').append(`<p class="messages">You Lose! Refresh page to play again.</p>`);
 				$(".zombie").remove();
 				$("#player").remove();
 				zombieArray = [];
-				$(".board").append(`<h1 class="loseBanner">Refresh page to play again!</h1>`);
+				$(".board").append(`<h2> Credits in Readme.md at https://github.com/WilliamJohnsonJr/zombiedefense </h2>`);
 			};
 			window.setTimeout(alerter, 200);
 		};
