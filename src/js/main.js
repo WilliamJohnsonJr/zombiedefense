@@ -35,7 +35,7 @@ function startGame(){
 		event.preventDefault();
 		if (event.code==="Space"){
 			player.attack();
-			if(player.hitpoints >=0){
+			if(player.hitpoints > 0){
 				game.levelUp();
 			};
 		};
