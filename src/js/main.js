@@ -35,7 +35,9 @@ function startGame(){
 		event.preventDefault();
 		if (event.code==="Space"){
 			player.attack();
-			game.levelUp();
+			if(player.hitpoints >=0){
+				game.levelUp();
+			};
 		};
 	});
 	window.setInterval(game.zombieMovement, 500);

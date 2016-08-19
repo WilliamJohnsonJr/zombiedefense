@@ -128,6 +128,7 @@ class Player {
 	}
 
 	attack(){
+		if (this.hitpoints > 0){
 		gun.fire();
 		$("#player").html(`<img src=${this.attackImage}>`);
 		zombieArray.forEach((zombie) =>{
@@ -149,6 +150,7 @@ class Player {
 			$("#player").html(`<img src='${this.image}'>`);
 		};
 		var timeoutID = window.setTimeout(imageReset.bind(this), 200);
+		}
 	};
 
 	moveLeft(){
@@ -251,7 +253,7 @@ class Zombie{
 		player.hitpoints -=1;
 		$(".bodyCounter").remove();
 		$(".board").append(`<h3 class="bodyCounter">Body Count: ${bodyCount} </br> Level: ${gameLevel} </br>   Lives Left: ${player.hitpoints}</h3>`);					
-		if(player.hitpoints === 0){
+		if(player.hitpoints <= 0){
 			player.scream();
 			function alerter(){
 				$('.messages').remove();
