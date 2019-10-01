@@ -1,14 +1,12 @@
 import $ from "jquery";
 import { Game, bodyCount, gameLevel, player, Player, zombieArray, Zombie, gun, Gun } from './classes';
-
 $(".board").append(`<h1 class="h1">ZOMBIE DEFENSE    </br> <img src="./images/zombieWalk.png"></h1>
 					<h2 class="h2"> Can you stay alive until Level 100? </br> </br> Controls: A - move left  D - move right  Space - shoot</h2>
 					<div class="h3">
 						<button class="startButton">Start Game</button>
 					</div>`);
 
-let soundtrack = new Audio("https://archive.org/download/ToccataAndFugueInDMinor/12ToccataAndFugueInDMinor.mp3");
-soundtrack.play();
+let soundtrack = new Audio("./sounds/12ToccataAndFugueInDMinor.mp3");
 
 function startGame(){
 	$(".h1").remove();
@@ -47,5 +45,6 @@ function startGame(){
 
 $(".startButton").on('click', function(event){
 	event.preventDefault();
+	soundtrack.play();
 	startGame();
 });

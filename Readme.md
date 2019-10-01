@@ -1,4 +1,4 @@
-![Zombie Defense Logo] (ZombieDefenseLogo.png)
+![Zombie Defense Logo] (./ZombieDefenseLogo.png)
 # Zombie Defense
 
 ## A Zombie Defense game. Can you make it to level 100?
@@ -85,3 +85,11 @@ Source url: <http://soundbible.com/2095-Mossberg-500-Pump-Shotgun.html>
 About: Great mossberg 500 or 590 pump shotgun fire and pump sound effect. great for movie or video game.
 Uploaded: 01.13.16 | License: Attribution 3.0 (<https://creativecommons.org/licenses/by/3.0/>); no changes were made to the original file. | Recorded by RA The Sun God | File Size: 1.31 MB | Downloads: 47170
 4.31 out of 5 with 49 user reviews
+
+
+Requires Node 6.17.1 to build (LTS Boron)
+
+Run `npm install` to install all dependencies.
+Run `gulp start` to start local development.
+Run `gulp build` to create a build in the app folder.
+Run `surge` using the surge-cli to deploy the app folder to a Surge site.

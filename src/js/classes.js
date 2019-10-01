@@ -261,7 +261,7 @@ class Zombie{
 				$(".zombie").remove();
 				$("#player").remove();
 				zombieArray = [];
-				$(".board").append(`<h2> Credits in Readme.md at https://github.com/WilliamJohnsonJr/zombiedefense </h2>`);
+				$(".board").append(`<h2> Credits in Readme.md at <a href="https://github.com/WilliamJohnsonJr/zombiedefense">https://github.com/WilliamJohnsonJr/zombiedefense</a></h2>`);
 			};
 			window.setTimeout(alerter, 200);
 		};
