@@ -1,4 +1,4 @@
-![Zombie Defense Logo] (./ZombieDefenseLogo.png)
+![Zombie Defense Logo] (/ZombieDefenseLogo.png)
 # Zombie Defense
 
 ## A Zombie Defense game. Can you make it to level 100?
