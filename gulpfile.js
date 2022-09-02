@@ -8,10 +8,8 @@ const gulp        = require('gulp'),
       browserify  = require('browserify'),
       notify      = require('gulp-notify'),
       babel       = require('babelify'),
-      chalk       = require('chalk'),
-      sass        = require('gulp-sass'),
+      sass        = require('gulp-sass')(require('sass')),
       sassImport  = require('sass-module-importer'),
-      plumber     = require('gulp-plumber'),
       watch       = require('gulp-watch'),
       browserSync = require('browser-sync').create();
 
@@ -19,23 +17,23 @@ const gulp        = require('gulp'),
 // Prevents Gulp from stopping.
 var handleError = function(err) {
   notify.onError("Doh! Check iTerm for details!")(err);
-  console.log(chalk.white.bgRed(' <error> ------------------------ '));
-  console.log(chalk.white(err.message));
-  console.log(chalk.white.bgRed(' </error> ----------------------- '));
+  console.log(' <error> ------------------------ ');
+  console.log(err.message);
+  console.log(' </error> ----------------------- ');
   this.emit('end');
 }
 
 // Converts SASS into CSS
-gulp.task('sass', () => {
-  gulp.src('./src/sass/main.scss')
+function gulpSass(cb) {
+  return gulp.src('./src/scss/main.scss')
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sass({ importer: sassImport() }).on('error', handleError))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./app/css'));
-});
+};
 
 // Converts ES2015+ to ES5 & Supports Modules
-gulp.task('browserify', () => {
+function browserifyMe () {
   return browserify('./src/js/main.js', {debug: true})
     .transform(babel)
     .bundle()
@@ -45,27 +43,53 @@ gulp.task('browserify', () => {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./app/js'));
-});
+};
+
+function watchSass () {
+  return watch('./src/sass/**/*.scss', gulpSass);
+}
+
+function watchJS() {
+  return watch(['./src/js/**/*.js', './package.json'], browserifyMe);
+}
+
+function watchCode() {
+  return watch('./app/**/**', () => { browserSync.reload(); });
+}
 
 // Watches our .scss & .js files for change
-gulp.task('watch', () => {
-  watch('./src/sass/**/*.scss', () => { gulp.start('sass'); });
-  watch(['./src/js/**/*.js', './package.json'], () => { gulp.start('browserify'); });
-  watch('./app/**/**', () => { browserSync.reload(); });
-});
+exports.watch = gulp.series(
+  gulpSass,
+  gulp.parallel(
+    watchSass,
+    watchJS,
+    watchCode
+  )
+);
 
 // Runs a simple browser sync server
-gulp.task('server', function(done) {
-  browserSync.init({
+function server() {
+  return browserSync.init({
     server: "./app",
     port: 8080,
     // open: false,
     notify: false
   });
-});
+};
 
 // Builds our app
-gulp.task('build', ['sass', 'browserify']);
+exports.build = gulp.series(
+  gulpSass,
+  browserifyMe
+)
 
 // Starts the development process
-gulp.task('start', ['build', 'watch', 'server']);
+exports.start = gulp.series(
+  gulpSass,
+  browserifyMe,
+  server,
+  gulp.parallel(watchSass,
+    watchJS,
+    watchCode),
+
+)

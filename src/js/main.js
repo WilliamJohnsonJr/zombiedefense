@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { Game, bodyCount, gameLevel, player, Player, zombieArray, Zombie, gun, Gun } from './classes';
+import { Game, bodyCount, gameLevel, player } from './classes';
 $(".board").append(`<h1 class="h1">ZOMBIE DEFENSE    </br> <img src="./images/zombieWalk.png"></h1>
 					<h2 class="h2"> Can you stay alive until Level 100? </br> </br> Controls: A - move left  D - move right  Space - shoot</h2>
 					<div class="h3">
