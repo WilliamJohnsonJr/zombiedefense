@@ -87,7 +87,7 @@ Uploaded: 01.13.16 | License: Attribution 3.0 (<https://creativecommons.org/lice
 4.31 out of 5 with 49 user reviews
 
 
-Requires Node 6.17.1 to build (LTS Boron)
+Recommended Node version: v18+
 
 Run `npm install` to install all dependencies.
 Run `gulp start` to start local development.

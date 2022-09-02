@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-let player, gun, game;
+let player, gun;
 let zombieArray = [];
 let bodyCount = 0;
 let gameLevel;
@@ -290,4 +290,4 @@ class Gun{
 	};
 };
 
-export { Game, bodyCount, gameLevel, player, Player, zombieArray, Zombie, gun, Gun };
+export { Game, bodyCount, gameLevel, player };
